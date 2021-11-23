@@ -23,7 +23,7 @@ def findCircle(image, par2, minR, maxR):
                 count += 1
             else:
                 image[y, x] = (0, 0, 0)
-    avg /= count
+    return avg / count
     print("Image Average: " + str(avg))
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -61,10 +61,20 @@ path = r'C:\Users\ColtM\Desktop\Coding Projects\TAMU\Validation\BasketballMid.jp
 img = cv2.imread(path)
 #findCircle(img, 20, 40, 60)
 
-print(timeDiff(5, 20))
+path = r'C:\Users\ColtM\Desktop\Coding Projects\TAMU\Validation\camera_pos.csv'
+output = open(path, "w")
+
+output.write(str(findCircle(img,20,40,60)) + ",")
+path = r'C:\Users\ColtM\Desktop\Coding Projects\TAMU\Validation\BasketballLeft.jpg'
+img = cv2.imread(path)
+output.write(str(findCircle(img,20,40,60)) + ",")
+path = r'C:\Users\ColtM\Desktop\Coding Projects\TAMU\Validation\BasketballRight.jpg'
+img = cv2.imread(path)
+output.write(str(findCircle(img,20,40,60)))
 print(timeDiff(0.1, 0.25))
 
 d = getTime(0.1)
 
 print(nextFallPoint(5, 1))
 print(nextFallPoint(d, 1))
+output.close()
